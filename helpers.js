@@ -2,12 +2,14 @@ define("helpers", [], function(){
 
 	var _swap = function(arr, i, j)
 	{
-		if( i != j && _isInRange(i) && _isInRange(j) )
+		if( i != j && _isInRange(arr, i) && _isInRange(arr, j) )
 		{
-			arr[i] += arr[j];
-			arr[j] = arr[i] - arr[j];
-			arr[i] -= arr[j];
+			var temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+
 		}
+		return arr;
 	}
 
 	var _isInRange = function(arr, i)

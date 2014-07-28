@@ -1,5 +1,4 @@
 define("quicksort", ["helpers"], function(helpers) {
-	var iteration = 0;   // TODO: needs to be cleaned
 
 	var _quicksort = function(source_arr){
 		'use strict';
@@ -17,54 +16,28 @@ define("quicksort", ["helpers"], function(helpers) {
 
 		var pivot_index = helpers.randomInt(start, end), 
 			i, j;
-		
 
-		//helpers.swap(source_arr, start, pivot_index);
-		var temp = source_arr[start];
-		source_arr[start] = source_arr[pivot_index];
-		source_arr[pivot_index] = temp;
+		helpers.swap(source_arr, start, pivot_index);
 
 		var pivot = start;
-		j = start + 1;
-		i = start;
-
-		//TODO: clean
-		console.log("Iteration: " + iteration++);
-		console.log("start = " + start);
-		console.log("end = " + end);
-		console.log("pivot_index = " + pivot_index);
-		console.log("i = " + i);
-		console.log("j = " + j);
-		console.log("Intermediate = " + source_arr);
-		console.log();
-
-
-
-
+		i = j = start + 1;
+		
 		while ( j <= end)
 		{
 			if (source_arr[j] < source_arr[pivot])
 			{
-				helpers.swap(source_arr, i, j);
+				var temp = source_arr[i];
+				source_arr[i] = source_arr[j];
+				source_arr[j] = temp;
 				++i;
 			}
-			++j;	
+			++j;
 		}
 
-		//helpers.swap(source_arr, pivot, i);
-		var temp = source_arr[pivot];
-		source_arr[pivot] = source_arr[i];
-		source_arr[i] = temp;
+		helpers.swap(source_arr, pivot, i-1);
 
-		console.log("Intermediate 2 = " + source_arr);
-		console.log("start = " + start);
-		console.log("end = " + end);
-		console.log("i = " + i);
-		console.log("j = " + j);
-		console.log("\n\n\n");
-
-		_partition(source_arr, start, i-1);
-		_partition(source_arr, i+1, end);
+		_partition(source_arr, start, i-2);
+		_partition(source_arr, i, end);
 
 	}
 
